@@ -39,7 +39,6 @@ use Nette\DI\Helpers;
 use Nette\DI\Statement;
 use Nette\PhpGenerator\ClassType as ClassTypeGenerator;
 use Nette\PhpGenerator\PhpLiteral;
-use Nette\Reflection\ClassType as ReflectionClassType;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use Nette\Utils\Finder;
@@ -451,7 +450,7 @@ class TranslationExtension extends \Nette\DI\CompilerExtension
 		try {
 			/** @var \Nette\DI\Definitions\ServiceDefinition $def */
 			$def = $builder->getDefinition($this->loaders[$format]);
-			$refl = ReflectionClassType::from($def->getEntity() ?: $def->getClass());
+			$refl = new \ReflectionClass($def->getEntity() ?: $def->getClass());
 			$method = $refl->getConstructor();
 			if ($method !== NULL && $method->getNumberOfRequiredParameters() > 1) {
 				return;
