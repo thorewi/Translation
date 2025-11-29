@@ -37,7 +37,7 @@ class PhpFileStorage extends \Nette\Caching\Storages\FileStorage implements \Net
 	 * @param array $meta
 	 * @return mixed
 	 */
-	protected function readData(array $meta)
+	protected function readData(array $meta): mixed
 	{
 		return [
 			'file' => $meta[self::FILE],
