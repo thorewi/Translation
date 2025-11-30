@@ -128,7 +128,7 @@ class CatalogueCompiler
 		foreach ($this->fallbackResolver->compute($translator, $locale) as $fallback) {
 			$fallbackSuffix = new PhpLiteral(ucfirst(preg_replace('~[^a-z0-9_]~i', '_', $fallback)));
 
-			$fallbackContent .= GeneratorHelpers::format(<<<EOF
+			$fallbackContent .=  (new \Nette\PhpGenerator\Dumper)->format(<<<EOF
 \$catalogue? = new MessageCatalogue(?, ?);
 \$catalogue?->addFallbackCatalogue(\$catalogue?);
 
@@ -137,7 +137,7 @@ EOF
 			$current = $fallbackSuffix;
 		}
 
-		$content = GeneratorHelpers::format(<<<EOF
+		$content = (new \Nette\PhpGenerator\Dumper)->format(<<<EOF
 use Kdyby\\Translation\\MessageCatalogue;
 
 \$catalogue = new MessageCatalogue(?, ?);
